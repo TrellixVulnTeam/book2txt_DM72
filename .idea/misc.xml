@@ -5,10 +5,12 @@
       <list>
         <option value="$PROJECT_DIR$/pdf2txt/pom.xml" />
         <option value="$PROJECT_DIR$/doc2txt/pom.xml" />
+        <option value="$PROJECT_DIR$/mobi2pdf/pom.xml" />
+        <option value="$PROJECT_DIR$/mobi2txt/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager">
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
