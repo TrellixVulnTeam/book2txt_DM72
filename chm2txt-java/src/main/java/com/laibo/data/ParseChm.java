@@ -9,7 +9,9 @@ import org.chm4j.*;
 public class ParseChm {
 
     public static void main(String[] args) throws IOException {
-//      ChmHandle.parse(new File("D:\\IdeaProjects\\book2txt\\chm2txt\\in\\婚姻之痒 - 副本.CHM"),new File("D:\\IdeaProjects\\book2txt\\chm2txt\\out"));
-        ChmHandle.parseAll(new File("D:\\IdeaProjects\\book2txt\\chm2txt\\in"),new File("D:\\IdeaProjects\\book2txt\\chm2txt\\out"));
+        ChmHandle.parseAll(new File("D:\\IdeaProjects\\book2txt\\chm2txt\\in"),new File("D:\\IdeaProjects\\book2txt\\chm2txt-java\\src\\main\\resources"));
+
+        File file = new File("D:\\IdeaProjects\\book2txt\\chm2txt-java\\src\\main\\resources\\1");
+
     }
 }

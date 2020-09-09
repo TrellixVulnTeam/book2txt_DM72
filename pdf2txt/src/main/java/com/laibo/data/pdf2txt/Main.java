@@ -14,22 +14,33 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Users\\laibo3\\Desktop\\01029001_潜园总集皕宋楼藏书志_陆心源撰归安陆氏- .djvu");
-        String content = getTextFormPDF(FileUtils.readFileToByteArray(file));
-        //content = replaceBlank(content);
-        System.out.println("find words:" + content.length());
-        FileUtils.write(new File(file.getName() + ".txt"), content, "utf-8");
-        System.out.println("generate :" + file.getAbsolutePath() + ".txt");
+        long start = System.currentTimeMillis();
+        String inPath = "D:\\IdeaProjects\\book2txt\\pdf2txt\\src\\main\\resources\\in";
+        String outPath = "D:\\IdeaProjects\\book2txt\\pdf2txt\\src\\main\\resources\\out";
+        pdfs2Txts(inPath,outPath);
+        System.out.println(System.currentTimeMillis()-start);
     }
 
-    private static String replaceBlank(String str) {
-        String dest = "";
-        if (str != null) {
-            Pattern p = Pattern.compile("\\s*|\t|\r|\n");
-            Matcher m = p.matcher(str);
-            dest = m.replaceAll("");
+
+    private static void pdfs2Txts(String inPath, String outPath) throws IOException {
+        File inFile = new File(inPath);
+        File outFile = new File(outPath);
+        if (!outFile.exists()) {
+            outFile.mkdirs();
         }
-        return dest;
+        if (inFile.isDirectory()) {
+            String[] filelist = inFile.list();
+            for (int i = 0; i < filelist.length; i++) {
+                try {
+                    File readfile = new File(inPath + "/" + filelist[i]);
+                    String content = getTextFormPDF(FileUtils.readFileToByteArray(readfile));
+                    FileUtils.write(new File(outPath + "/" + readfile.getName() + ".txt"), content, "utf-8");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    continue;
+                }
+            }
+        }
     }
 
     private static String getTextFormPDF(byte[] file) {
@@ -41,9 +52,8 @@ public class Main {
             pdfdoc = PDDocument.load(is);
             PDFTextStripper stripper = new PDFTextStripper();
             text = stripper.getText(pdfdoc);
-
         } catch (Exception e) {
-            //TODO
+            e.printStackTrace();
         } finally {
             try {
                 if (pdfdoc != null) {

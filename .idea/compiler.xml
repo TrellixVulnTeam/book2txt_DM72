@@ -6,13 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="chm2txt-java" />
         <module name="doc2txt" />
+        <module name="html2txt" />
         <module name="mobi2txt" />
         <module name="pdf2txt" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="chm2txt-java" target="1.8" />
       <module name="doc2txt" target="1.5" />
+      <module name="html2txt" target="1.8" />
       <module name="mobi2txt" target="1.5" />
       <module name="pdf2txt" target="1.5" />
     </bytecodeTargetLevel>

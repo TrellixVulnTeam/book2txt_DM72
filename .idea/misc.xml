@@ -7,10 +7,15 @@
         <option value="$PROJECT_DIR$/doc2txt/pom.xml" />
         <option value="$PROJECT_DIR$/mobi2pdf/pom.xml" />
         <option value="$PROJECT_DIR$/mobi2txt/pom.xml" />
+        <option value="$PROJECT_DIR$/html2txt/pom.xml" />
+        <option value="$PROJECT_DIR$/chm2txt-java/pom.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="PythonCompatibilityInspectionAdvertiser">
+    <option name="version" value="2" />
   </component>
 </project>

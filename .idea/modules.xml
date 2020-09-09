@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/chm2txt/chm2txt.iml" filepath="$PROJECT_DIR$/chm2txt/chm2txt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chm2txt-java/chm2txt-java.iml" filepath="$PROJECT_DIR$/chm2txt-java/chm2txt-java.iml" />
       <module fileurl="file://$PROJECT_DIR$/djvu2pdf/djvu2pdf.iml" filepath="$PROJECT_DIR$/djvu2pdf/djvu2pdf.iml" />
       <module fileurl="file://$PROJECT_DIR$/doc2txt/doc2txt.iml" filepath="$PROJECT_DIR$/doc2txt/doc2txt.iml" />
       <module fileurl="file://$PROJECT_DIR$/epub2txt/epub2txt.iml" filepath="$PROJECT_DIR$/epub2txt/epub2txt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/html2txt/html2txt.iml" filepath="$PROJECT_DIR$/html2txt/html2txt.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobi2pdf/mobi2pdf.iml" filepath="$PROJECT_DIR$/mobi2pdf/mobi2pdf.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobi2txt/mobi2txt.iml" filepath="$PROJECT_DIR$/mobi2txt/mobi2txt.iml" />
       <module fileurl="file://$PROJECT_DIR$/pdf2txt/pdf2txt.iml" filepath="$PROJECT_DIR$/pdf2txt/pdf2txt.iml" />

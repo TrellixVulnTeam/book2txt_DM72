@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import os
+import traceback
+from os.path import join
 import sys
 import urllib.request, urllib.parse, urllib.error
 import zipfile
@@ -120,11 +122,11 @@ class TocParser():
         return self.toc
 
 class epub2txt():
-    def __init__(self,epubfile=None):
+    def __init__(self,epubfile=None,outPath=None):
         self.epub = epubfile
+        self.outPath = outPath
 
     def convert(self):
-        print("Processing %s ..." % self.epub)
         file = zipfile.ZipFile(self.epub,"r");
         rootfile = ContainerParser(file.read("META-INF/container.xml")).parseContainer()
         title, author, ncx = BookParser(file.read(rootfile)).parseBook()
@@ -132,8 +134,15 @@ class epub2txt():
         if ops != "":
             ops = ops+"/"
         toc = TocParser(file.read(ops + ncx)).parseToc()
+        # savePath = join(os.path.dirname(self.epub),"%s_%s.txt" % (title, author))
+        # outPath = join(os.path.dirname(self.epub),"out")
+        if os.path.exists(self.outPath):
+            pass
+        else:
+            os.makedirs(outPath)
 
-        fo = open("%s_%s.txt" % (title, author), "w")
+        savePath = join(outPath,os.path.basename(self.epub)+".txt")
+        fo = open(savePath, "w")
         for t in toc:
             html = file.read(ops + t.content.split("#")[0])
             text = html2text.html2text(html.decode("utf-8"))
@@ -144,10 +153,30 @@ class epub2txt():
 def usage():
     print("Usage: epub2txt <path-to-epub>")
 
+
+
+# python epub2txt.py inPath outPath
+#
 if __name__ == "__main__":
     if(len(sys.argv) == 1 or sys.argv[1] == "help"):
         usage()
     elif sys.argv[1]:
-        filenames = glob(sys.argv[1])
-        for filename in filenames:
-            epub2txt(filename).convert()
+        # filenames = glob(sys.argv[1])
+        # for filename in filenames:
+        #     print(filename)
+        #     epub2txt(filename).convert()
+        inPath = sys.argv[1]
+        outPath = sys.argv[2]
+        if os.path.isdir(inPath):
+            print("it's a directory")
+            for root,dirs,files in os.walk(inPath):
+                for file in files:
+                    try:
+                        if file.endswith(".epub"):
+                            epub2txt(join(root,file),outPath).convert()
+                    except Exception as a:
+                        print(a)
+                        traceback.print_exc()
+                        continue
+        elif os.path.isfile(inPath):
+            print("it's a normal file")

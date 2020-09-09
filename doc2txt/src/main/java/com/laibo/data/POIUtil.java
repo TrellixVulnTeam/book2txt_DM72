@@ -1,10 +1,6 @@
 package com.laibo.data;
-/**
- * <p>Description:POIUtil 工具类</p>
- * <p>Copyright: Copyright (c)2019</p>
- * <p>Company: Tope</p>
- * <P>@version 1.0</P>
- */
+
+
 import org.apache.poi.POIXMLDocument;
 import org.apache.poi.POIXMLTextExtractor;
 import org.apache.poi.hwpf.extractor.WordExtractor;
@@ -61,25 +57,37 @@ public class POIUtil {
         }
     }
 
-    public static void doc2Txt(String filePath) throws Exception{
 
-//        List<String> linList = new ArrayList<String>();
+    public static void docs2Txts(String filePath,String outPath) throws Exception {
+        File file = new File(filePath);
+        File outFile = new File(outPath);
+        if (!outFile.exists()) {
+            outFile.mkdirs();
+        }
+        if (file.isDirectory()) {
+            String[] filelist = file.list();
+            for (int i = 0; i < filelist.length; i++) {
+                File readfile = new File(filePath + "\\" + filelist[i]);
+                doc2Txt(readfile,outPath);
+            }
+        }
+    }
+
+    public static void doc2Txt(File file,String outPath) throws Exception{
         String buffer = "";
         try {
-            if (filePath.endsWith(".doc")) {
-                File file = new File(filePath);
+            if (file.toString().endsWith(".doc")) {
                 InputStream is = new FileInputStream(file);
-                String parent = file.getParent();
-                String name = file.getName().substring(0, file.getName().indexOf("."));
-                FileOutputStream out = new FileOutputStream(parent+"/"+name+".txt");
+                String name = file.getName();
+                FileOutputStream out = new FileOutputStream(outPath+"/"+name+".txt");
                 WordExtractor ex = new WordExtractor(is);
                 buffer = ex.getText();
                 ex.close();
+                is.close();
                 if(buffer.length() > 0){
                     //使用回车换行符分割字符串
                     String [] arry = buffer.split("\\r\\n");
                     for (String string : arry) {
-//                        linList.add(string.trim());
                         byte[] bytes = string.trim().getBytes();
                         for(int i=0; i<bytes.length; i++) {
                             out.write(bytes[i]);
@@ -87,16 +95,13 @@ public class POIUtil {
                     }
                 }
                 out.close();
-            } else if (filePath.endsWith(".docx")) {
-                OPCPackage opcPackage = POIXMLDocument.openPackage(filePath);
+            } else if (file.toString().endsWith(".docx")) {
+                OPCPackage opcPackage = POIXMLDocument.openPackage(file.toString());
                 POIXMLTextExtractor extractor = new XWPFWordExtractor(opcPackage);
                 buffer = extractor.getText();
                 extractor.close();
-
-                File file = new File(filePath);
-                String parent = file.getParent();
                 String name = file.getName().substring(0, file.getName().indexOf("."));
-                FileOutputStream out = new FileOutputStream(parent+"/"+name+".txt");
+                FileOutputStream out = new FileOutputStream(outPath+"/"+name+".txt");
 
                 if(buffer.length() > 0){
                     //使用换行符分割字符串
@@ -108,9 +113,10 @@ public class POIUtil {
                         }
                     }
                 }
+                out.close();
             }
         } catch (Exception e) {
-            System.err.print("error---->"+filePath);
+            System.err.print("error---->"+file.toString());
             e.printStackTrace();
         }
     }

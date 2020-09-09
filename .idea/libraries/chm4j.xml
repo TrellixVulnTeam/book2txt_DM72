@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="chm4j">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/chm2txt-java/src/lib/chm4j.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
